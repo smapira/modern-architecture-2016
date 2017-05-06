@@ -1,7 +1,7 @@
 version: '2'
 services:
   kong:
-    image: mashape/kong
+    image: kong:latest
     depends_on:
       - cassandra
     links:
@@ -15,6 +15,10 @@ services:
       - 7946:7946/udp
     security_opt:
       - seccomp:unconfined
+    environment:
+      KONG_DATABASE: cassandra
+      KONG_CASSANDRA_CONTACT_POINTS: cassandra
+      KONG_PG_HOST: cassandra
   cassandra:
     image: cassandra:2.2.5
     ports:
@@ -35,4 +39,5 @@ services:
     environment:
       POSTGRES_USER: rails-api
       POSTGRES_DB: rails-api_production
+      POSTGRES_PASSWORD: password
     env_file: rails-api/.env
