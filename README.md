@@ -6,3 +6,5 @@
 * Ruby on Rails
 * Docker Compose
 
+## References
+* https://github.com/Mashape/docker-kong
